@@ -56,13 +56,13 @@ public:
         }
         else
         {
-            while (!s.empty() && (s[0] == p[0] || p[0] == '.')) //*的特殊性，循环处理
+            while (!s.empty() && (s[0] == p[0] || p[0] == '.')) //*的特殊性，处理0~n cases
             {
                 if (isMatch(s, p.substr(2)))
                     return true;
                 s = s.substr(1);
             }
-            return isMatch(s, p.substr(2));
+            return isMatch(s, p.substr(2)); // not match, process next pattern
         }
     }
 };
