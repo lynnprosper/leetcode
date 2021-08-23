@@ -3,6 +3,11 @@
 1 2 3 4 5
 3 5 7 9 11
 两个N长降序序列，分别任取一个数，求前k个最大的。
+这些和可以看成n个有序表：
+A1+B1 <= A1+B2 <= ... 
+A2+B1 <= A2+B2 <= ... 
+...
+利用归并排序，每次O(logn),共取k次
 
 输出：16 15 14 14
 */
@@ -54,3 +59,27 @@ int main(){
 
 	return 0;
 }
+
+/*2.
+2. 合并三个有序链表，
+两个两个的合并
+
+*/
+ List merge(List head1, List head2){
+ 2     List mergeHead = NULL;
+ 3     if (head1 == NULL) {
+ 4         return head2;
+ 5     }
+ 6     if (head2 == NULL){
+ 7         return head1;
+ 8     }
+ 9 
+10     if (head1->item < head2->item){
+11         mergeHead = head1;
+12         mergeHead->next = merge(head1->next, head2);
+13     }else{
+14         mergeHead = head2;
+15         mergeHead->next = merge(head1, head2->next);
+16     }
+17     return mergeHead;
+18 }
