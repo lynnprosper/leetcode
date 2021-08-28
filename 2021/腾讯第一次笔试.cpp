@@ -1,4 +1,35 @@
 /*
+0111101, 这样的字符串，输出连续子串中0的个数减去1的个数最大值
+
+int main()
+{
+	////find函数返回类型 size_type
+	//freopen("in.txt", "r", stdin);
+	string s;
+	while (cin >> s) {
+		int pre = -1;
+		int ans = s[0] == '0' ? 1 : -1;
+		for (const auto &x : s) {
+			int t = 0;
+			if (x == '0') {
+				t = 1;
+			}
+			if (x == '1') {
+				t = -1;
+			}
+			pre = max(pre + t, t);
+			ans = max(ans, pre);
+		}
+		cout << ans << endl;
+	}
+	return 0;
+
+}
+*/
+
+
+
+/*
 5 4
 1 2 3 4 5
 3 5 7 9 11
