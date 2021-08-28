@@ -1,4 +1,41 @@
 /*
+P1298 最接近的分数
+已知某个分数分子的取值范围 n nn ，分母的取值范围 m mm ，和一个 d o u b l e doubledouble 浮点数 x xx ，求出满足条件并且最接近 x xx 的最简分数。
+
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+using namespace std;
+int main(){
+	int n,m;
+	double x;
+	cin>>n>>m>>x;
+	double min3=10000000000000;
+	int min1,min2;
+	bool g=false;
+	for(int i=1;i<=m;i++){
+		for(int j=1;j<=n;j++){
+			if(__gcd(i,j)!=1)continue;//是否互质
+			if(abs(double(j)/double(i)-x)>min3)continue;//超过了目前最佳答案，剪枝1
+			else if(abs(double(j)/double(i)-x)<min3){
+				g=false;//已更新
+				//接下来三行为传新值操作
+				min3=abs(double(j)/double(i)-x);
+				min1=j;
+				min2=i;
+			}else if(abs(double(j)/double(i)-x)==min3)g=true;//相等，有多重正解
+		}
+	}
+	if(g)cout<<"TOO MANY"<<endl;//如果有重复
+	else cout<<min1<<"/"<<min2;
+	return 0;
+}
+
+
+*/
+
+
+/*
 0111101, 这样的字符串，输出连续子串中0的个数减去1的个数最大值
 
 int main()
