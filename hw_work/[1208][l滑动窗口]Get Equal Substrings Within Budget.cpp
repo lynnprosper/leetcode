@@ -31,3 +31,24 @@ public:
         return res;
     }
 };
+
+class Solution {
+public:
+    int equalSubstring(string s, string t, int maxCost) {
+        int res = 0;
+        int left = 0;
+        int right = 0;
+        int current = 0;
+        while(right < s.size()) {
+            int cost = abs(s[right] - t[right]);
+            current += cost;
+            if(current > maxCost) {
+                current -= abs(s[left] - t[left]);
+                left++;
+            }
+            right++;
+            res = max(res, right-left);
+        }
+        return res;
+    }
+};
