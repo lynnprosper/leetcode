@@ -1,0 +1,46 @@
+/* 
+描述 https://www.nowcoder.com/practice/b4525d1d84934cf280439aeecc36f4af?tpId=295&tqId=25269&sourceUrl=%2Fexam%2Foj%3FquestionJobId%3D10%26subTabName%3Donline_coding_page
+对于长度为n的一个字符串A（仅包含数字，大小写英文字母），请设计一个高效算法，计算其中最长回文子串的长度。
+输入：
+"ababc"
+返回值：
+3
+说明：
+最长的回文子串为"aba"与"bab"，长度都为3
+*/
+/**
+ * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+ *
+ * 
+ * @param A string字符串 
+ * @return int整型
+ */
+#include <string.h>
+int getLongestPalindrome(char* A ) {
+    // write code here
+    int len = strlen(A);
+    int dp[1001][1001] = {0}; // dp[i][j]表示i~j的字符串是否回文
+    int ans = 1;
+    for (int i = 0; i < len; i++) { // 初始化
+        dp[i][i] = 1;
+        if (i < len - 1) {
+            if (A[i] == A[i+1]) {
+                dp[i][i+1] = 1;
+                ans = 2;
+            }
+        }
+    }
+    // 遍历长度
+    for (int sublen = 3; sublen <= len; sublen++) {
+        for (int i = 0; i <= len - sublen; i++) {
+            int j = i + sublen - 1;
+            if (A[i] == A[j]) {
+                dp[i][j] = dp[i+1][j-1]; // 转移方程
+            }
+            if (dp[i][j] == 1) {
+                ans = sublen;
+            }
+        }
+    }
+    return ans;
+}
